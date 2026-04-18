@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(64, 62, 62);
+}
+
+.main-container{
+    width: 500px;
+    color: rgb(64, 62, 62);
+    background-color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 20px;
+}
+h1{
+    margin-bottom: 10px;
+    /* display: inline; */
+}
+
+.price-line{
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+.price-ico{
+    width: 30px;
+}
