@@ -1,6 +1,6 @@
 import getStockData from "./fakeStockAPI.js"
 
-let oldPrice = 0
+let oldPrice = null
 
 function renderStockTicker(stockData) {
     const stockDisplayName = document.getElementById("name")
@@ -14,16 +14,25 @@ function renderStockTicker(stockData) {
     stockDisplayPrice.textContent = `Price: ${stockData.price}`
     stockDisplayTime.textContent = `Time: ${stockData.time}`
 
-    if(Number(stockData.price) > oldPrice) {
-        stockDisplayPriceIcon.innerHTML = `<img class="price-ico" src="icons/green_triangle.png" alt="up">`
-    }
-    else if(Number(stockData.price) < oldPrice) {
-        stockDisplayPriceIcon.innerHTML = `<img class="price-ico" src="icons/red_triangle.png" alt="down">`
-    }
-    else {
-        stockDisplayPriceIcon.innerHTML = `<img class="price-ico" src="icons/grey_triangle.png" alt="no change">`
-    }
-    oldPrice = stockData.price
+    const priceNumeric = Number(stockData.price)
+    const priceImg = priceNumeric > oldPrice ? 'green_triangle.png': priceNumeric < oldPrice ? 'red_triangle.png': 'grey_triangle.png'
+    const priceIconElement = document.createElement('img')
+    priceIconElement.src = `./icons/${priceImg}`
+    priceIconElement.style.width = "100%"
+    priceIconElement.alt = "price direction icon"
+    stockDisplayPriceIcon.replaceChildren(priceIconElement)
+
+    // if(Number(stockData.price) > oldPrice) {
+    //     stockDisplayPriceIcon.innerHTML = `<img class="price-ico" src="icons/green_triangle.png" alt="up">`
+    // }
+    // else if(Number(stockData.price) < oldPrice) {
+    //     stockDisplayPriceIcon.innerHTML = `<img class="price-ico" src="icons/red_triangle.png" alt="down">`
+    // }
+    // else {
+    //     stockDisplayPriceIcon.innerHTML = `<img class="price-ico" src="icons/grey_triangle.png" alt="no change">`
+    // }
+
+    oldPrice = priceNumeric
 }
 
 setInterval(() => {
